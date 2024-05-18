@@ -279,7 +279,15 @@ void ToolMain::onActionSaveTerrain()
 
 void ToolMain::Tick(MSG *msg)
 {
-	//do we have a selection
+	//Selection
+	if (m_toolInputCommands.mouse_LB_Down)
+	{
+		m_selectedObject = m_d3dRenderer.MousePicking();
+		m_toolInputCommands.mouse_LB_Down = false;
+	}
+
+
+
 	//do we have a mode
 	//are we clicking / dragging /releasing
 	//has something changed
@@ -305,14 +313,17 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_keyArray[msg->wParam] = false;
 		break;
 
-	case WM_MOUSEMOVE:
+	case WM_MOUSEMOVE: //Update mouse pos
+		m_toolInputCommands.mouse_X = GET_X_LPARAM(msg->lParam);
+		m_toolInputCommands.mouse_Y = GET_Y_LPARAM(msg->lParam);
 		break;
 
-	case WM_LBUTTONDOWN:	//mouse button down,  you will probably need to check when its up too
-		//set some flag for the mouse button in inputcommands
+	case WM_LBUTTONDOWN:	//mouse button down
+		m_toolInputCommands.mouse_LB_Down = true;
 		break;
 
 	}
+
 	//here we update all the actual app functionality that we want.  This information will either be used int toolmain, or sent down to the renderer (Camera movement etc
 	//WASD movement
 	if (m_keyArray['W'])
