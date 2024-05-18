@@ -21,7 +21,7 @@ public:
 	std::vector<int>& getSelectedIDs() { return selectedIDs;  }
 
 	//Selection
-
+	bool WasSelected(std::vector<int>& ids_vector, int selected); //Returns false if not duplicate
 private:
 	std::vector<int> selectedIDs; 
 };
@@ -30,3 +30,4 @@ inline EntityManager::EntityManager()
 {
 	//EntityManager::entity_manager() = 0;
 }
+

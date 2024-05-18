@@ -1,4 +1,6 @@
 #include "MFCMain.h"
+
+#include "EntityManager.h"
 #include "resource.h"
 
 
@@ -75,7 +77,11 @@ int MFCMain::Run()
 				std::wstring statusString = L"The selected objects are:";
 				for (auto i = 0; i < ids.size(); ++i)
 				{
-					statusString += L", " + std::to_wstring(ids[i]);
+					if(!EntityManager::entity_manager().WasSelected(EntityManager::entity_manager().getSelectedIDs(), i))
+					{
+						statusString += L", " + std::to_wstring(ids[i]);
+
+					}
 				}
 				m_frame->m_wndStatusBar.SetPaneText(1, statusString.c_str(), 1);
 			}

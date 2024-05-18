@@ -162,18 +162,16 @@ std::vector<int> Game::MousePicking()
             if (m_displayList[i].m_model.get()->meshes[y]->boundingBox.Intersects(nearPoint, pickingVector, pickedDistance))
             {
                 //Ref to the selected ids
+
+              
+				bool isSelected = false;
+
+                if (!EntityManager::entity_manager().getSelectedIDs().empty()) //Look if selected ids arent empty. 
+                {
+                    isSelected = EntityManager::entity_manager().WasSelected(EntityManager::entity_manager().getSelectedIDs(),i);
+                }
+
                 EntityManager::entity_manager().getSelectedIDs().push_back(i); 
-
-                //std::vector<int>& selectedIDs = EntityManager::entity_manager().getSelectedIDs();
-				//bool isSelected = false;
-
-                //if(!selectedIDs.empty()) //Look if selected ids arent empty. 
-                //{
-                //    auto it = std::find(selectedIDs.begin(), selectedIDs.end(), i);
-                //    if (it != selectedIDs.end()) { //Delete id. For deselection
-                //        selectedIDs.erase(it);
-                //    }
-
                 //    if (selectedID != -1 && !isSelected) //If selected object wasnt in vector
                 //    { //Push it back
                 //        selectedIDs.push_back(i);
