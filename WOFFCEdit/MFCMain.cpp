@@ -69,12 +69,20 @@ int MFCMain::Run()
 		}
 		else
 		{	
-			int ID = m_ToolSystem.getCurrentSelectionID();
-			std::wstring statusString = L"Selected Object: " + std::to_wstring(ID);
+			std::vector<int> ids = m_ToolSystem.getCurrentSelectionID();
+			if(!ids.size() == 0)
+			{
+				std::wstring statusString = L"The selected objects are:";
+				for (auto i = 0; i < ids.size(); ++i)
+				{
+					statusString += L", " + std::to_wstring(ids[i]);
+				}
+				m_frame->m_wndStatusBar.SetPaneText(1, statusString.c_str(), 1);
+			}
+
 			m_ToolSystem.Tick(&msg);
 
 			//send current object ID to status bar in The main frame
-			m_frame->m_wndStatusBar.SetPaneText(1, statusString.c_str(), 1);	
 		}
 	}
 
@@ -100,7 +108,7 @@ void MFCMain::MenuEditSelect()
 	//modeless dialogue must be declared in the class.   If we do local it will go out of scope instantly and destroy itself
 	m_ToolSelectDialogue.Create(IDD_DIALOG1);	//Start up modeless
 	m_ToolSelectDialogue.ShowWindow(SW_SHOW);	//show modeless
-	m_ToolSelectDialogue.SetObjectData(&m_ToolSystem.m_sceneGraph, &m_ToolSystem.m_selectedObject);
+	m_ToolSelectDialogue.SetObjectData(&m_ToolSystem.m_sceneGraph, m_ToolSystem.m_selectedObjects);
 }
 
 void MFCMain::ToolBarButton1()

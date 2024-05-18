@@ -11,6 +11,7 @@
 #include "DisplayChunk.h"
 #include "ChunkObject.h"
 #include "InputCommands.h"
+
 #include <vector>
 
 #include "Camera.h"
@@ -54,7 +55,7 @@ public:
 	void ClearDisplayList();
 
 	//custom
-	int MousePicking(); //Mouse selection method
+	std::vector<int> MousePicking(); //Mouse selection method
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

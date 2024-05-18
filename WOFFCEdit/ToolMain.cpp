@@ -1,4 +1,5 @@
 #include "ToolMain.h"
+#include "EntityManager.h"
 #include "resource.h"
 #include <vector>
 #include <sstream>
@@ -9,7 +10,7 @@ ToolMain::ToolMain()
 {
 
 	m_currentChunk = 0;		//default value
-	m_selectedObject = 0;	//initial selection ID
+	m_selectedObjects.push_back(0);	//initial selection ID
 	m_sceneGraph.clear();	//clear the vector for the scenegraph
 	m_databaseConnection = NULL;
 
@@ -28,10 +29,10 @@ ToolMain::~ToolMain()
 }
 
 
-int ToolMain::getCurrentSelectionID()
+std::vector<int>& ToolMain::getCurrentSelectionID()
 {
 
-	return m_selectedObject;
+	return EntityManager::entity_manager().getSelectedIDs();
 }
 
 void ToolMain::onActionInitialise(HWND handle, int width, int height)
@@ -282,8 +283,16 @@ void ToolMain::Tick(MSG *msg)
 	//Selection
 	if (m_toolInputCommands.mouse_LB_Down)
 	{
-		m_selectedObject = m_d3dRenderer.MousePicking();
-		m_toolInputCommands.mouse_LB_Down = false;
+		if(m_toolInputCommands.isTabDown) //Multiple select
+		{
+			m_toolInputCommands.mouse_LB_Down = false;
+			m_selectedObjects = m_d3dRenderer.MousePicking();
+		}
+		else //Single select
+		{
+			EntityManager::entity_manager().getSelectedIDs().clear(); //Clear bc we're not selecting more
+			m_selectedObjects = m_d3dRenderer.MousePicking();
+		}
 	}
 
 
@@ -320,6 +329,9 @@ void ToolMain::UpdateInput(MSG * msg)
 
 	case WM_LBUTTONDOWN:	//mouse button down
 		m_toolInputCommands.mouse_LB_Down = true;
+		break;
+	case WM_LBUTTONUP:
+		m_toolInputCommands.mouse_LB_Down = false;
 		break;
 
 	}
@@ -361,4 +373,15 @@ void ToolMain::UpdateInput(MSG * msg)
 	else m_toolInputCommands.rotLeft = false;
 
 	//WASD
+	//Selection
+	if (m_keyArray[9]) { //Multi-select
+		//If TAB is pressed
+		m_toolInputCommands.isTabDown = true;
+
+	}
+	else //Single-select
+	{
+		m_toolInputCommands.isTabDown = false;
+		
+	}
 }

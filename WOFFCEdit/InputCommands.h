@@ -14,10 +14,15 @@ struct InputCommands
 	int mouse_Y;
 	bool mouse_LB_Down;
 
+	//Selection
+	bool isTabDown; 
+
 	void InitValues()
 	{
 		mouse_X = 0; mouse_Y = 0;
 		mouse_LB_Down = false;
+
+		isTabDown = false; 
 
 		forward = 0;
 		back = 0;
@@ -27,4 +32,5 @@ struct InputCommands
 		rotRight = 0; 
 	}
 
+	
 };

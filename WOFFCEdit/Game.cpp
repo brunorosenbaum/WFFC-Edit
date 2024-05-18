@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "DisplayObject.h"
 #include <string>
+#include "EntityManager.h"
 
 
 using namespace DirectX;
@@ -119,8 +120,10 @@ void Game::Tick(InputCommands *Input)
     Render();
 }
 
-int Game::MousePicking()
+std::vector<int> Game::MousePicking()
 {
+    std::vector<int> selectedIDs;
+    
     int selectedID = -1;
     float pickedDistance = 0;
 
@@ -158,13 +161,31 @@ int Game::MousePicking()
             //checking for ray intersection
             if (m_displayList[i].m_model.get()->meshes[y]->boundingBox.Intersects(nearPoint, pickingVector, pickedDistance))
             {
-                selectedID = i;
+                //Ref to the selected ids
+                EntityManager::entity_manager().getSelectedIDs().push_back(i); 
+
+                //std::vector<int>& selectedIDs = EntityManager::entity_manager().getSelectedIDs();
+				//bool isSelected = false;
+
+                //if(!selectedIDs.empty()) //Look if selected ids arent empty. 
+                //{
+                //    auto it = std::find(selectedIDs.begin(), selectedIDs.end(), i);
+                //    if (it != selectedIDs.end()) { //Delete id. For deselection
+                //        selectedIDs.erase(it);
+                //    }
+
+                //    if (selectedID != -1 && !isSelected) //If selected object wasnt in vector
+                //    { //Push it back
+                //        selectedIDs.push_back(i);
+                //    }
+                //}
+
             }
         }
     }
 
     //if we got a hit.  return it.  
-    return selectedID;
+    return EntityManager::entity_manager().getSelectedIDs();
 
 }
 
