@@ -144,9 +144,9 @@ int Game::MousePicking()
         XMMATRIX local = m_world * XMMatrixTransformation(g_XMZero, Quaternion::Identity, scale, g_XMZero, rotate, translate);
 
         //Unproject the points on the near and far plane, with respect to the matrix we just created.
-        XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, screenDimensions_.right, screenDimensions_.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_view, local);
+        XMVECTOR nearPoint = XMVector3Unproject(nearSource, 0.0f, 0.0f, screenDimensions_.right, screenDimensions_.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, camera_->getViewMatrix(), local);
 
-        XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, screenDimensions_.right, screenDimensions_.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, m_view, local);
+        XMVECTOR farPoint = XMVector3Unproject(farSource, 0.0f, 0.0f, screenDimensions_.right, screenDimensions_.bottom, m_deviceResources->GetScreenViewport().MinDepth, m_deviceResources->GetScreenViewport().MaxDepth, m_projection, camera_->getViewMatrix(), local);
 
         //turn the transformed points into our picking vector. 
         XMVECTOR pickingVector = farPoint - nearPoint;
@@ -175,9 +175,9 @@ void Game::Update(DX::StepTimer const& timer)
     //Update camera
     camera_->Update(m_InputCommands); 
 
-    m_batchEffect->SetView(m_view);
+    m_batchEffect->SetView(camera_->getViewMatrix());
     m_batchEffect->SetWorld(Matrix::Identity);
-	m_displayChunk.m_terrainEffect->SetView(m_view);
+	m_displayChunk.m_terrainEffect->SetView(camera_->getViewMatrix());
 		m_displayChunk.m_terrainEffect->SetWorld(Matrix::Identity);
 
 #ifdef DXTK_AUDIO
@@ -253,7 +253,7 @@ void Game::Render()
 
 		XMMATRIX local = m_world * XMMatrixTransformation(g_XMZero, Quaternion::Identity, scale, g_XMZero, rotate, translate);
 
-		m_displayList[i].m_model->Draw(context, *m_states, local, m_view, m_projection, false);	//last variable in draw,  make TRUE for wireframe
+		m_displayList[i].m_model->Draw(context, *m_states, local, camera_->getViewMatrix(), m_projection, false);	//last variable in draw,  make TRUE for wireframe
 
 		m_deviceResources->PIXEndEvent();
 	}

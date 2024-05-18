@@ -11,6 +11,7 @@ public:
 	~Camera(); 
 	void Update(InputCommands input_);
 	DirectX::SimpleMath::Vector3 getPos() { return v3camPos; }
+	DirectX::SimpleMath::Matrix getViewMatrix() { return viewMatrix; }
 
 private:
 	//functionality
