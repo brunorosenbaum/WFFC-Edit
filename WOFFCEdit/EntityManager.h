@@ -28,7 +28,10 @@ public:
 
 	//For cam focus
 	void InitObjects(std::vector<DisplayObject>* scene_objects);
-	DisplayObject* getLastSelectedObject(); 
+	DisplayObject* getLastSelectedObject();
+
+	//Spawning new objects
+	void SpawnObject(DisplayObject* object_); 
 
 private:
 	std::vector<int> selectedIDs;

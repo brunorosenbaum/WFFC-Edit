@@ -39,3 +39,26 @@ DisplayObject* EntityManager::getLastSelectedObject()
 	}
 	return nullptr;
 }
+
+void EntityManager::SpawnObject(DisplayObject* object_)
+{
+	//Give default model and txr
+	object_->m_model = display_objects->back().m_model;
+	object_->m_texture_diffuse = display_objects->back().m_texture_diffuse;
+	object_->m_position = display_objects->back().m_position;
+	//Edit pos
+	object_->m_position.z = display_objects->back().m_position.z + 2;
+	object_->m_position.x = display_objects->back().m_position.x + 2;
+	object_->m_scale = display_objects->back().m_scale; 
+	object_->m_orientation = display_objects->back().m_orientation;
+	//Add to vector of all objects
+	display_objects->push_back(*object_); 
+
+	//Update id
+	for (int i = 0; i < display_objects->size(); i++)
+	{
+		(*display_objects)[i].m_ID = i;
+	}
+
+	
+}

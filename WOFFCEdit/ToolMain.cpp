@@ -298,7 +298,12 @@ void ToolMain::Tick(MSG *msg)
 	if (m_toolInputCommands.isFocus)
 		m_d3dRenderer.CameraFocus(); 
 
-
+	//Spawn
+	if(m_toolInputCommands.isSpawn)
+	{
+		EntityManager::entity_manager().SpawnObject(new DisplayObject());
+		m_toolInputCommands.isSpawn = false; 
+	}
 
 	//do we have a mode
 	//are we clicking / dragging /releasing
@@ -391,4 +396,8 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.isTabDown = false;
 		
 	}
+
+	if (m_keyArray[32]) //Spawning object
+		m_toolInputCommands.isSpawn = true;
+
 }

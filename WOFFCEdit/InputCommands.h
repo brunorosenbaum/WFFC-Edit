@@ -20,13 +20,17 @@ struct InputCommands
 	//Focus
 	bool isFocus;
 
+	//Spawn
+	bool isSpawn; 
+
 	void InitValues()
 	{
 		mouse_X = 0; mouse_Y = 0;
 		mouse_LB_Down = false;
 
 		isTabDown = false;
-		isFocus = false; 
+		isFocus = false;
+		isSpawn = false; 
 
 		forward = 0;
 		back = 0;
