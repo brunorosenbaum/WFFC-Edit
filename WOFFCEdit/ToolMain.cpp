@@ -294,6 +294,9 @@ void ToolMain::Tick(MSG *msg)
 			m_selectedObjects = m_d3dRenderer.MousePicking();
 		}
 	}
+	//Focus
+	if (m_toolInputCommands.isFocus)
+		m_d3dRenderer.CameraFocus(); 
 
 
 
@@ -371,6 +374,10 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.rotLeft = true;
 	}
 	else m_toolInputCommands.rotLeft = false;
+
+	if (m_keyArray['F']) //Focus
+		m_toolInputCommands.isFocus = true;
+	else m_toolInputCommands.isFocus = false; 
 
 	//WASD
 	//Selection

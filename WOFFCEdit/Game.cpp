@@ -66,6 +66,9 @@ void Game::Initialize(HWND window, int width, int height)
     CreateWindowSizeDependentResources();
     GetClientRect(window, &screenDimensions_);
 
+    //Init display objects in the entity manager
+    EntityManager::entity_manager().InitObjects(&m_displayList);
+
 
 #ifdef DXTK_AUDIO
     // Create DirectXTK for Audio objects
@@ -185,6 +188,11 @@ std::vector<int> Game::MousePicking()
     //if we got a hit.  return it.  
     return EntityManager::entity_manager().getSelectedIDs();
 
+}
+
+void Game::CameraFocus() //Focuses on last selected object
+{
+    camera_->Focus(EntityManager::entity_manager().getLastSelectedObject()->m_position); 
 }
 
 // Updates the world.

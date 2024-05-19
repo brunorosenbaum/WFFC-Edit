@@ -56,6 +56,7 @@ public:
 
 	//custom
 	std::vector<int> MousePicking(); //Mouse selection method
+	void CameraFocus();
 
 #ifdef DXTK_AUDIO
 	void NewAudioDevice();

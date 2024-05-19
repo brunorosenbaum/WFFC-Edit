@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+#include "DisplayObject.h"
+
 class EntityManager
 { //Singleton class for managing objects
 public:
@@ -19,15 +21,23 @@ public:
 
 	//Getsetters
 	std::vector<int>& getSelectedIDs() { return selectedIDs;  }
+	std::vector<DisplayObject>*& getDisplayObjects() { return display_objects;  }
 
 	//Selection
 	bool WasSelected(std::vector<int>& ids_vector, int selected); //Returns false if not duplicate
+
+	//For cam focus
+	void InitObjects(std::vector<DisplayObject>* scene_objects);
+	DisplayObject* getLastSelectedObject(); 
+
 private:
-	std::vector<int> selectedIDs; 
+	std::vector<int> selectedIDs;
+	std::vector<DisplayObject>* display_objects;
+
 };
 
 inline EntityManager::EntityManager()
 {
-	//EntityManager::entity_manager() = 0;
+	display_objects = nullptr; 
 }
 

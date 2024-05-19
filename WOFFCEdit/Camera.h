@@ -3,27 +3,29 @@
 #include <SimpleMath.h>
 #include "InputCommands.h"
 //Dedicated camera class
-
+using namespace DirectX::SimpleMath; 
 class Camera
 {
 public:
 	Camera();
 	~Camera(); 
 	void Update(InputCommands input_);
-	DirectX::SimpleMath::Vector3 getPos() { return v3camPos; }
-	DirectX::SimpleMath::Matrix getViewMatrix() { return viewMatrix; }
-
+	//Getsetters
+	Vector3 getPos() { return v3camPos; }
+	Matrix getViewMatrix() { return viewMatrix; }
+	//Dedicated methods
+	void Focus(Vector3 objectPos);
 private:
 	//functionality
 	float fMovespeed;
 
 	//camera vectors
-	DirectX::SimpleMath::Vector3		v3camPos;
-	DirectX::SimpleMath::Vector3		v3camRot;
-	DirectX::SimpleMath::Vector3		v3camLookAt;
-	DirectX::SimpleMath::Vector3		v3CamDirection;
-	DirectX::SimpleMath::Vector3		v3camRight;
-	DirectX::SimpleMath::Matrix viewMatrix; 
+	Vector3		v3camPos;
+	Vector3		v3camRot;
+	Vector3		v3camLookAt;
+	Vector3		v3CamDirection;
+	Vector3		v3camRight;
+	Matrix viewMatrix; 
 	float fcamRotRate; //rotation rate
 
 };

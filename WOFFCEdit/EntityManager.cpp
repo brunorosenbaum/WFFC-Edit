@@ -16,3 +16,26 @@ bool EntityManager::WasSelected(std::vector<int>& ids_vector, int selected)
 	//else, not found, false
 	return false;
 }
+
+void EntityManager::InitObjects(std::vector<DisplayObject>* scene_objects)
+{
+	//Copy vector so all scene objects can be accessed by the manager class
+	display_objects = scene_objects; 
+}
+
+DisplayObject* EntityManager::getLastSelectedObject()
+{
+	//If this is empty return nullptr
+	if (display_objects->empty()) return nullptr;
+
+	//Go through objects
+	for (int i = 0; i < display_objects->size(); ++i)
+	{
+		//Return last object selected by user
+		if (selectedIDs.back() == i)
+		{
+			return &display_objects->at(i);
+		}
+	}
+	return nullptr;
+}

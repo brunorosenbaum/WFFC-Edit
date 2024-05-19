@@ -17,12 +17,16 @@ struct InputCommands
 	//Selection
 	bool isTabDown; 
 
+	//Focus
+	bool isFocus;
+
 	void InitValues()
 	{
 		mouse_X = 0; mouse_Y = 0;
 		mouse_LB_Down = false;
 
-		isTabDown = false; 
+		isTabDown = false;
+		isFocus = false; 
 
 		forward = 0;
 		back = 0;

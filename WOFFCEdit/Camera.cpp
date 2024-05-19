@@ -67,3 +67,24 @@ void Camera::Update(InputCommands input_)
 	viewMatrix = DirectX::SimpleMath::Matrix::CreateLookAt(v3camPos, v3camLookAt, DirectX::SimpleMath::Vector3::UnitY);
 
 }
+
+void Camera::Focus(Vector3 objectPos)
+{
+	//Move camera to focus on object
+	v3camPos.x = objectPos.x; //to center
+	v3camPos.y = objectPos.y + 1; //y is 
+	v3camPos.z = objectPos.z - 2;
+
+	//Change cameras orientation to look at object
+	//Coord differences
+	Vector3 d = Vector3(objectPos.x - v3camPos.x,
+		objectPos.y - v3camPos.y,
+		objectPos.z - v3camPos.z);
+
+	//Yaw 
+	v3camRot.y = atan2(d.x, d.z) * (180.0f / PI);
+
+	//Pitch 
+	float distance = sqrt(d.x * d.x + d.z * d.z);
+	v3camRot.x = -atan2(d.y, distance) * (180.0f / PI);
+}
