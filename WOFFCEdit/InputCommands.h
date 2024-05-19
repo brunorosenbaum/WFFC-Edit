@@ -13,6 +13,7 @@ struct InputCommands
 	int mouse_X;
 	int mouse_Y;
 	bool mouse_LB_Down;
+	bool mouse_RB_Down;
 
 	//Selection
 	bool isTabDown; 
@@ -27,6 +28,7 @@ struct InputCommands
 	{
 		mouse_X = 0; mouse_Y = 0;
 		mouse_LB_Down = false;
+		mouse_RB_Down = false;
 
 		isTabDown = false;
 		isFocus = false;

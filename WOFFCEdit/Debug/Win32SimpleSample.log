@@ -1,11 +1,14 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Win32SimpleSample.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Camera.cpp
 C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(7,19): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(37,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(38,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(85,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(88,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(89,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(39,24): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(86,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(89,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(90,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(95,74): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(95,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\Camera.cpp(115,25): warning C4305: 'initializing': truncation from 'double' to 'float'
   DisplayChunk.cpp
 C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(14,50): warning C4305: '=': truncation from 'double' to 'float'
 C:\Users\Bruno\Documents\ABERTAY\YEAR 4\TOOLS\WFFC-Edit\WFFC-Edit\WOFFCEdit\DisplayChunk.cpp(15,49): warning C4244: '=': conversion from 'int' to 'float', possible loss of data

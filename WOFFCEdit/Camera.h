@@ -15,9 +15,11 @@ public:
 	Matrix getViewMatrix() { return viewMatrix; }
 	//Dedicated methods
 	void Focus(Vector3 objectPos);
+	void MouseControls(InputCommands& input_commands);
 private:
 	//functionality
 	float fMovespeed;
+	Vector2 prevMousePos;
 
 	//camera vectors
 	Vector3		v3camPos;

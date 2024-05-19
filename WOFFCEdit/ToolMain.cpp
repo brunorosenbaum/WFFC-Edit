@@ -335,11 +335,18 @@ void ToolMain::UpdateInput(MSG * msg)
 		m_toolInputCommands.mouse_Y = GET_Y_LPARAM(msg->lParam);
 		break;
 
-	case WM_LBUTTONDOWN:	//mouse button down
+	case WM_LBUTTONDOWN:	//l mouse button down
 		m_toolInputCommands.mouse_LB_Down = true;
 		break;
 	case WM_LBUTTONUP:
 		m_toolInputCommands.mouse_LB_Down = false;
+		break;
+
+	case WM_RBUTTONDOWN:	//r mouse button down
+		m_toolInputCommands.mouse_RB_Down = true;
+		break;
+	case WM_RBUTTONUP:
+		m_toolInputCommands.mouse_RB_Down = false;
 		break;
 
 	}

@@ -1,4 +1,5 @@
 #pragma once
+#include <stack>
 #include <vector>
 
 #include "DisplayObject.h"
@@ -31,7 +32,7 @@ public:
 	DisplayObject* getLastSelectedObject();
 
 	//Spawning new objects
-	void SpawnObject(DisplayObject* object_); 
+	void SpawnObject(DisplayObject* object_);
 
 private:
 	std::vector<int> selectedIDs;

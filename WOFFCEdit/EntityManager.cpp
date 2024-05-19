@@ -62,3 +62,4 @@ void EntityManager::SpawnObject(DisplayObject* object_)
 
 	
 }
+

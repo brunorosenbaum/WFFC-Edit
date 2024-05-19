@@ -21,6 +21,7 @@ Camera::~Camera()
 
 void Camera::Update(InputCommands input_)
 {
+	MouseControls(input_); 
 	DirectX::SimpleMath::Vector3 planarMotionVector = v3CamDirection;
 	planarMotionVector.y = 0.0;
 
@@ -81,10 +82,54 @@ void Camera::Focus(Vector3 objectPos)
 		objectPos.y - v3camPos.y,
 		objectPos.z - v3camPos.z);
 
-	//Yaw 
+	//Pitch
 	v3camRot.y = atan2(d.x, d.z) * (180.0f / PI);
 
-	//Pitch 
+	//Roll 
 	float distance = sqrt(d.x * d.x + d.z * d.z);
 	v3camRot.x = -atan2(d.y, distance) * (180.0f / PI);
+}
+
+void Camera::MouseControls(InputCommands& input_commands)
+{
+	Vector2 currentMousePos = Vector2(input_commands.mouse_X, input_commands.mouse_Y);
+
+	//Control cam with rmb
+	if (input_commands.mouse_RB_Down)
+	{
+		//Calc mouse mvt difference
+		Vector2 diff = Vector2(currentMousePos.x - prevMousePos.x, currentMousePos.y - prevMousePos.y);
+		diff.Normalize(); //Normalize it to obtain vector
+
+		//If theres been changes
+		if (diff.x != 0 || diff.y != 0)
+		{
+			v3camRot.y -= fcamRotRate * diff.x; //yaw
+			v3camRot.x -= fcamRotRate * diff.y; //pitch
+		}
+
+		float cos_Pitch, cos_Yaw;
+		float sin_Pitch, sin_Yaw;
+
+		// calc euler angles
+		float euler = PI / 180; 
+		cos_Pitch = cosf(v3camRot.x * euler);
+		cos_Yaw = cosf(v3camRot.y * euler);
+
+		sin_Pitch = sinf(v3camRot.x * euler);
+		sin_Yaw = sinf(v3camRot.y * euler);
+
+		// Update direction values
+		v3CamDirection.x = sin_Yaw * cos_Pitch;
+		v3CamDirection.y = sin_Pitch;
+		v3CamDirection.z = cos_Pitch * -cos_Yaw;
+
+		//Update lookat
+		v3camLookAt = v3camPos + v3CamDirection;
+
+		viewMatrix = Matrix::CreateLookAt(v3camPos, v3camLookAt, Vector3::UnitY);
+	}
+
+	//Set prev mouse pos to current one
+	prevMousePos = currentMousePos;
 }
